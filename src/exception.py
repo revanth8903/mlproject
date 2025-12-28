@@ -1,6 +1,6 @@
 
 import sys
-import logging
+from src.logger import logging
 
 # logging.basicConfig(
 #     filename="app.log",
@@ -28,6 +28,7 @@ class CustomException(Exception):
       return self.error_message
    
 
+
 # if __name__=="__main__":
    
 #     try:
@@ -35,6 +36,8 @@ class CustomException(Exception):
 #     except Exception as e:
 #         logging.info("Divide by Zero")
 #         raise CustomException(e,sys)
+   
+
 
     
 
