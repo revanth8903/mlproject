@@ -7,6 +7,17 @@ import pandas as pd
 from sklearn.model_selection import train_test_split
 from dataclasses import dataclass
 
+# from src.components.data_transformation import DataTranformation
+# from src.components.data_transformation import DataTranformationConfig
+
+# from src.components.data_transformation import DataTransformation
+# from src.components.data_transformation import DataTransformationConfig
+
+from src.components.data_transformation import DataTransformation
+from src.components.data_transformation import DataTransformationConfig
+
+
+
 ## In Data Ingestion, there should be some inputs that may be probably required by this Data Ingestion Component
 ## Any Input that I require I will probably give through this particular Data Ingestion Config.
 
@@ -21,6 +32,8 @@ class DataIngestionConfig:
     train_data_path: str = os.path.join('artifacts',"train.csv")
     test_data_path: str = os.path.join('artifacts',"test.csv")
     raw_data_path: str = os.path.join('artifacts',"data.csv")
+
+## Data Ingestion config is just like providing all the input things that is required for the Data Ingestion Component
 
 ## Now Data Ingestion Component knows where to save the train,test and data path because of this file path
 
@@ -38,8 +51,7 @@ class DataIngestion:
     def initiate_data_ingestion(self):
         logging.info("Entered the Data Ingestion Method or Component")
         try:
-            breakpoint()
-            df= pd.read_csv('notebook\data\stud.csv')
+            df= pd.read_csv('notebook/data/stud.csv')
             logging.info('Read the dataset as dataframe')
 
             os.makedirs(os.path.dirname(self.ingestion_config.train_data_path), exist_ok=True)
@@ -67,7 +79,10 @@ class DataIngestion:
 
 if __name__ == "__main__":
     obj=DataIngestion()
-    obj.initiate_data_ingestion()
+    train_data, test_data = obj.initiate_data_ingestion()
+
+    data_transformation = DataTransformation()
+    data_transformation.initiate_data_transformation(train_data, test_data)
 
 
 
